@@ -2,8 +2,6 @@ package com.velaphi.tabby.ui.view
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.velaphi.tabby.R
+import com.velaphi.tabby.data.database.TabbyEntry
 import com.velaphi.tabby.data.model.Image
 
 class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    private var imageList: List<Image> = arrayListOf()
+    private var tabbyEntryList: List<TabbyEntry> = arrayListOf()
     private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -25,33 +24,33 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return imageList.size
+        return tabbyEntryList.size
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val image: Image? = imageList[position]
+        val tabbyEntry: TabbyEntry? = tabbyEntryList[position]
         context = holder.itemView.context
-        holder.titleTextView.text = context.getString(R.string.image_title, position.toString())
+        holder.titleTextView.text = tabbyEntry?.title
 
         Glide
             .with(context)
-            .load(image?.url)
+            .load(tabbyEntry?.url)
             .centerCrop()
             .placeholder(R.drawable.ic_placeholder)
             .error(R.drawable.ic_error)
             .into(holder.catImageView);
 
-        holder.itemView.setOnClickListener {image?.let { openDetailsActivity(image) }  }
+        holder.itemView.setOnClickListener {tabbyEntry?.let { openDetailsActivity(tabbyEntry) }  }
     }
 
-    private fun openDetailsActivity(image: Image) {
-        val intent = Intent(context, DetailsActivity::class.java)
-        intent.putExtra(IMAGE, image)
+    private fun openDetailsActivity(tabbyEntry: TabbyEntry) {
+        val intent = Intent(context, TabbyDetailsActivity::class.java)
+        intent.putExtra(IMAGE, tabbyEntry)
         context.startActivity(intent)
     }
 
-    fun setItems(imageList: List<Image>) {
-        this.imageList = imageList
+    fun setItems(tabbyEntryList: List<TabbyEntry>) {
+        this.tabbyEntryList = tabbyEntryList
         notifyDataSetChanged()
     }
 
