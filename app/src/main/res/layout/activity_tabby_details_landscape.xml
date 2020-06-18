@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:text="@string/play_me"
             android:layout_gravity="center"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/ic_play"/>
     </LinearLayout>
 
 </LinearLayout>

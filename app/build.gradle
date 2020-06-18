@@ -24,6 +24,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -48,7 +52,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.5'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
@@ -60,16 +64,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation('com.squareup.retrofit2:converter-simplexml:2.1.0') {
-        exclude group: 'xpp3', module: 'xpp3'
-        exclude group: 'stax', module: 'stax-api'
-        exclude group: 'stax', module: 'stax'
-    }
-
     //exoplayer
-    implementation "com.google.android.exoplayer:exoplayer-core:$version_exoplayer"
-    implementation "com.google.android.exoplayer:exoplayer-dash:$version_exoplayer"
-    implementation "com.google.android.exoplayer:exoplayer-ui:$version_exoplayer"
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.5.1'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
 }
